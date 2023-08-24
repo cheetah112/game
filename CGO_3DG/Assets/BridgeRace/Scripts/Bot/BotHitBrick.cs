@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBrick : MonoBehaviour
+public class BotHitBrick : MonoBehaviour
 {
-    private Player player;
+    private Bot player;
     private void Start() {
-        player = GetComponent<Player>();
+        player = GetComponent<Bot>();
     }
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Brick")){
@@ -15,6 +15,7 @@ public class HitBrick : MonoBehaviour
                 if(brick.brickColor == player.playerColor){
                     other.gameObject.transform.parent = gameObject.transform;
                     other.gameObject.transform.position = player.GetBagPos();
+                    other.enabled = false;
                     player.NewBagPos(0.2f);
                 }
             }
